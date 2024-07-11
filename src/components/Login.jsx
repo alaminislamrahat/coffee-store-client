@@ -20,6 +20,25 @@ const Login = () => {
         login(email, password)
         .then(result => {
             console.log(result);
+
+            const user = {
+                email,
+                lastLoggedAt : result?.user?.metadata?.lastSignInTime
+            }
+
+            fetch('https://coffee-store-server-rho-lovat.vercel.app/user',{
+                method : "PATCH",
+                headers : {
+                    "content-type" : "application/json"
+                },
+                body : JSON.stringify(user)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+
+            // update last logged in the databasse 
         })
         .then(error => {
             console.log(error);

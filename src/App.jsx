@@ -10,7 +10,7 @@ function App() {
   const [coffees, setCoffees] = useState(loadedCoffees)
 
   return (
-    <div className='m-20'>
+    <div className=''>
       <Headers></Headers>
       <h1 className='text-6xl font-bold text-purple-500 text-center my-4'>Coffee Shop</h1>
 

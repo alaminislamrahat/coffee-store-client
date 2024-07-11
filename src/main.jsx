@@ -12,12 +12,13 @@ import UpdateCofee from './components/UpdateCofee.jsx';
 import AuthProvider from './Providers/AuthProvider.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
+import Users from './components/Users.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
-    loader: () => fetch('http://localhost:5000/coffee')
+    loader: () => fetch('https://coffee-store-server-rho-lovat.vercel.app/coffee')
   },
   {
     path: "/addCoffee",
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/updateCoffee/:id",
     element: <UpdateCofee></UpdateCofee>,
-    loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
+    loader: ({ params }) => fetch(`https://coffee-store-server-rho-lovat.vercel.app/coffee/${params.id}`)
   },
   {
     path : "/login",
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
    {
     path : "/register",
     element : <Register></Register>
+   },
+   {
+    path : "/user",
+    element : <Users/>,
+    loader : ()=> fetch('https://coffee-store-server-rho-lovat.vercel.app/user')
    }
 ]);
 

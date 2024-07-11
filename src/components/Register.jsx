@@ -16,20 +16,32 @@ const Register = () => {
         const name = form.name.value;
         const password = form.password.value;
         const email = form.email.value;
-        console.log(email,password,name);
+        console.log(email, password, name);
 
         // register 
 
-        register(email,password)
-        .then(result => {
-            console.log(result);
-            updateProfile(auth.currentUser,{
-                displayName : name
+        register(email, password)
+            .then(result => {
+                console.log(result);
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                })
+
+                const createdAt = result?.user?.metadata?.creationTime;
+                const user = { email ,createdAt : createdAt}
+                fetch('https://coffee-store-server-rho-lovat.vercel.app/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
             })
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
